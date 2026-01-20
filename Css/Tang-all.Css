@@ -1,0 +1,294 @@
+/* ============================================================
+   1. THIẾT LẬP CHUNG & BIẾN (VARIABLES)
+   ============================================================ */
+:root {
+    --mau_chu: #EDC382;
+    --bong_mau_chu: 0 0 5px #EDC382;
+    --bong_sang: 0 0 10px #EDC382;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+/* Thiết lập chung cho body */
+body {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-image 0.5s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: white;
+    padding-top: 60px;
+}
+
+/* --- PHẦN KHÁC BIỆT: ẢNH NỀN CHO TỪNG TẦNG --- */
+body.tang-10 { background-image: url(../2_images/Hinh_Nen/10.png); }
+body.tang-9  { background-image: url(../2_images/Hinh_Nen/9.png); }
+body.tang-8  { background-image: url(../2_images/Hinh_Nen/8.png); }
+body.tang-7  { background-image: url(../2_images/Hinh_Nen/7.png); }
+body.tang-6  { background-image: url(../2_images/Hinh_Nen/6.png); }
+
+/* ============================================================
+   2. LỚP PHỦ NỀN & HIỆU ỨNG THỊ GIÁC (VISUAL EFFECTS)
+   ============================================================ */
+.nen-mo {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes shine-flicker {
+    0%, 100% { opacity: 1; filter: brightness(100%); }
+    50% { opacity: 0.8; filter: brightness(150%) drop-shadow(0 0 10px white); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   3. THANH ĐIỀU HƯỚNG (HEADER & NAVIGATION)
+   ============================================================ */
+.thanh-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-bottom: 2px solid var(--mau_chu);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.header-noi-dung {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--mau_chu);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.menu-header {
+    display: flex;
+    gap: 20px;
+}
+
+.link-header {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.link-header:hover {
+    color: var(--mau_chu);
+    text-shadow: var(--bong_sang);
+}
+
+/* ============================================================
+   4. BỐ CỤC CHÍNH & SIDEBAR (LAYOUT & MENU)
+   ============================================================ */
+.khung_chinh {
+    width: 100%;
+    max-width: 1500px;
+    z-index: 10;
+    padding: 0 15px;
+}
+
+.vung_duoi {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.menu {
+    background-color: #00000091;
+    background: 
+        radial-gradient(circle at 0 0, transparent 20px, #00000091 21px),
+        radial-gradient(circle at 100% 0, transparent 20px, #00000091 21px),
+        radial-gradient(circle at 0 100%, transparent 20px, #00000091 21px),
+        radial-gradient(circle at 100% 100%, transparent 20px, #00000091 21px);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: top left, top right, bottom left, bottom right;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chu_sang {
+    color: var(--mau_chu);
+    text-shadow: var(--bong_mau_chu);
+    font-weight: bold;
+    font-size: 150%;
+    white-space: nowrap;
+    margin: 10px 0;
+}
+
+.danh_sach {
+    list-style: none;
+    width: 100%;
+}
+
+.danh_sach img {
+    width: 100%;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.nut-hieuung-1:hover {
+    animation: shine-flicker 1s infinite;
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   5. KHU VỰC HIỂN THỊ NỘI DUNG (CONTENT & TABS)
+   ============================================================ */
+.Noi-dung {
+    flex: 2;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 20px;
+    min-height: 600px;
+    transform: translateY(-20px);
+}
+
+.hang_nut {
+    display: flex;
+    gap: 15px;
+    transform: translateY(-38px);
+}
+
+.nut_bam {
+    width: 120px;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--mau_chu);
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.nut_bam:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px var(--mau_chu);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ============================================================
+   6. CHI TIẾT CÂU CHUYỆN (ACCORDION STYLE)
+   ============================================================ */
+.tieu-de-chinh {
+    font-weight: bold;
+    color: var(--mau_chu);
+    text-shadow: var(--bong_mau_chu);
+}
+
+.danh-sach-chuyen {
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+.vung-chuyen {
+    margin-bottom: 15px;
+}
+
+.khung-bam {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.khung-bam:hover .ten-chuyen {
+    color: white;
+    text-shadow: var(--bong_sang);
+}
+
+.hinh-khung {
+    width: 60px;
+    height: 80px;
+    background-image: url('../2_images/Khung-2.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.khung-bam:hover .hinh-khung {
+    transform: scale(1.1);
+}
+
+.ten-chuyen {
+    font-size: 20px;
+    color: var(--mau_chu);
+    font-weight: bold;
+}
+
+.noi-dung-chuyen {
+    display: none;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 2px solid var(--mau_chu);
+    margin-left: 30px;
+    margin-top: 10px;
+    animation: fadeIn 0.5s;
+}
+
+.tieu-de-trong {
+    color: var(--mau_chu);
+    margin-bottom: 10px;
+}
+
+.duong-ke-vang {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--mau_chu), transparent);
+    margin: 15px 0;
+    width: 100%;
+}

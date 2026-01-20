@@ -1,0 +1,206 @@
+/* 1. Thiết lập chung & Biến (Variables) */
+:root {
+    --mau_chu: #EDC382;
+    --bong_mau_chu: 0 0 5px #EDC382;
+    --bong_sang: 0 0 10px #EDC382; /* Bổ sung để hiệu ứng hover không bị lỗi */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url(../2_images/Hinh_Nen/Site-background-dark.webp); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-image 0.5s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: auto; 
+    color: white;
+    padding-top: 60px; /* Thống nhất khoảng cách bằng chiều cao Header */
+}
+
+/* 2. Lớp phủ nền */
+.nen-mo {
+    position: fixed;
+    inset: 0; /* Cách viết tắt cho top, left, width, height: 100% */
+    background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 3. Header trôi nổi (Đã gộp và sửa biến) */
+.thanh-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-bottom: 2px solid var(--mau_chu);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.header-noi-dung {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--mau_chu);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.menu-header {
+    display: flex;
+    gap: 20px;
+}
+
+.link-header {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.link-header:hover {
+    color: var(--mau_chu);
+    text-shadow: var(--bong_sang);
+}
+
+/* 4. Khung nội dung chính */
+.khung_chinh {
+    width: 100%;
+    max-width: 1500px;
+    z-index: 10;
+    padding: 0 15px;
+}
+
+.vung_duoi {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top:20px;
+}
+
+.menu {
+    background-color: #00000091;
+    background: 
+        radial-gradient(circle at 0 0, transparent 20px, #00000091 21px),
+        radial-gradient(circle at 100% 0, transparent 20px, #00000091 21px),
+        radial-gradient(circle at 0 100%, transparent 20px, #00000091 21px),
+        radial-gradient(circle at 100% 100%, transparent 20px, #00000091 21px);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: top left, top right, bottom left, bottom right;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chu_sang {
+    color: var(--mau_chu);
+    text-shadow: var(--bong_mau_chu);
+    font-weight: bold;
+    font-size: 150%;
+    white-space: nowrap;
+    margin: 10px 0;
+}
+
+.danh_sach {
+    list-style: none;
+    width: 100%;
+}
+
+.danh_sach img {
+    width: 100%;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+/* 5. Nội dung chính */
+.Noi-dung {
+    flex: 2;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 20px;
+    min-height: 600px;
+    transform: translateY(-20px);
+}
+
+.hang_nut {
+    display: flex;
+    gap: 15px;
+    transform: translateY(-38px);
+}
+
+.nut_bam {
+    width: 120px;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--mau_chu);
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.nut_bam:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px var(--mau_chu);
+}
+
+/* 6. Hiệu ứng */
+.nut-hieuung-1:hover {
+    animation: shine-flicker 1s infinite;
+    transform: scale(1.1);
+}
+
+@keyframes shine-flicker {
+    0%, 100% { opacity: 1; filter: brightness(100%); }
+    50% { opacity: 0.8; filter: brightness(150%) drop-shadow(0 0 10px white); }
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+.anh-GioiThieu {
+    width:50%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px; 
+}

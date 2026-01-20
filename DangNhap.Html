@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="Css/DangNhap.Css">
+    <script src="Jv/jquery-3.7.1.js"></script>
+
+    <style>
+        #man-hinh-den-chuyen-canh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black; /* Màu đen đặc */
+            z-index: 9999; /* Đảm bảo nó nằm trên cùng mọi thứ */
+            opacity: 0; /* Ban đầu trong suốt */
+            pointer-events: none; /* Ban đầu không chặn chuột */
+            transition: opacity 1.5s ease; /* Thời gian chuyển cảnh tối dần là 1.5 giây */
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            const manHinhCho = document.getElementById('man-hinh-cho');
+            const manHinhDangNhap = document.getElementById('man-hinh-dang-nhap');
+            const nutVaoWeb = document.getElementById('nut-vao-web');
+            const video = document.getElementById('video-nen');
+            // Lấy thêm phần tử màn hình đen mới tạo
+            const manHinhDen = document.getElementById('man-hinh-den-chuyen-canh');
+
+            if (video) {
+                video.pause();
+            }
+
+            if (nutVaoWeb) {
+                nutVaoWeb.addEventListener('click', function () {
+                    if (video) {
+                        video.muted = false;
+                        video.volume = 0.3;
+                        video.play();
+                    }
+                    // Hiệu ứng lúc mới vào
+                    manHinhCho.style.opacity = '0';
+                    setTimeout(() => {
+                        manHinhCho.style.display = 'none';
+                        manHinhDangNhap.style.display = 'flex';
+                        requestAnimationFrame(() => {
+                             manHinhDangNhap.style.opacity = '1';
+                        });
+                    }, 1500);
+                });
+            }
+
+            // Phần xử lý ký tên
+            $('#ky-ten').on('input', function () {
+                var noiDung = $(this).val().trim();
+                if (noiDung.length > 0) {
+                    $('#nut-thu-moi').addClass('hien-ra');
+                } else {
+                    $('#nut-thu-moi').removeClass('hien-ra');
+                }
+            });
+
+            // --- CẬP NHẬT MỚI: HIỆU ỨNG TỐI DẦN (FADE TO BLACK) ---
+            const nutDangNhap = document.getElementById('nut-thu-moi');
+            if (nutDangNhap && manHinhDen) {
+                nutDangNhap.addEventListener('click', function () {
+                    // 1. Hiện màn hình đen lên (Che phủ tất cả)
+                    manHinhDen.style.opacity = '1';
+                    // Chặn tương tác chuột để người dùng không bấm lung tung lúc đang chuyển cảnh
+                    manHinhDen.style.pointerEvents = 'auto';
+
+                    // (Tùy chọn) Làm nhỏ dần âm lượng video trong 1.5 giây
+                    if (video) { $(video).animate({volume: 0}, 1500); }
+
+                    // 2. Đợi khoảng 1.5 giây cho màn hình đen hoàn toàn rồi mới chuyển trang
+                    // Thời gian này khớp với transition trong CSS của #man-hinh-den-chuyen-canh
+                    setTimeout(function() {
+                         window.location.href = 'TrangChu.Html';
+                    }, 1500);
+                });
+            }
+            // ----------------------------------------------------
+
+        });
+    </script>
+    <title>Library Of Ruina:</title>
+</head>
+
+<body>
+    <video id="video-nen" autoplay muted>
+        <source src="1_video/Library Of Ruina.mp4" type="video/mp4">
+    </video>
+    <div id="man-hinh-dang-nhap">
+        <div id="thu-moi">
+            <table>
+                <tr>
+                    <img src="2_images/logo_chu_lon.webp" id="chulon">
+                    <img src="2_images/logo_chu_nho.png" id="chunho">
+                </tr>
+                <tr>
+                    <h2 style="color:#EDC382; font-weight: bold; text-shadow:0 0 3px #EDC382;">
+                        THE INVITATION
+                    </h2>
+                    <img src="2_images/trang_tri_1.webp">
+                </tr>
+                <tr>
+                    <p id="loi-moi">
+                        DEAR GUEST: I FORMALLY INVITE YOU TO THE LIBRARY. <br>
+                        THE LIBRARY'S BOOKS CAN PROVIDE YOU WITH ALL THE
+                        <br>WISDOM<br>
+                        WEALTH, HONOR, AND POWER YOU SEEK.<br>
+                        HOWEVER, AN ORDEAL WILL AWAIT YOU IN THE LIBRARY.<br>
+                        IF YOU CANNOT OVERCOME THIS ORDEAL,<br>
+                        YOU WILL BE CONVERTED INTO A BOOK YOURSELF.
+                    </p>
+                </tr>
+                <tr>
+                    <h2 style="color:#EDC382; font-weight:bold; padding-bottom:5px;">
+                        ◁ Ký Tên ▷
+                    </h2>
+                    <input type="text" id="ky-ten" placeholder="Nhập tên của bạn...">
+                </tr>
+                <tr>
+                    <button id="nut-thu-moi" type="button">Chấp Nhận Lời Mời</button>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="man-hinh-cho">
+        <div id="anh-nen-mo"></div>
+        <button id="nut-vao-web" type="button">
+            <img src="2_images/Site-logo.webp" alt="buttno">
+        </button>
+    </div>
+
+    <div id="man-hinh-den-chuyen-canh"></div>
+</body>
+
+</html>
